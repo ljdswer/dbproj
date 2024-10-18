@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="request-chooser-container">
+    <div class="request-chooser-title">
+      Главное меню
+    </div>
+    <div class="request-chooser-list">
+      <a class="request-chooser-list-item center" href="/auth">Авторизация</a>
+      <a class="request-chooser-list-item center" href="/clients">Клиенты</a>
+      <a class="request-chooser-list-item center" href="/accounts">Счета</a>
+      <a class="request-chooser-list-item center" href="/ops">Операции</a>
+      <a class="request-chooser-list-item center" href="/reqs">Запросы</a>
+    </div>
+    <div class="request-chooser-footer"></div>
+  </div>
+
+</html>

@@ -1,0 +1,32 @@
+services:
+  app:
+    image: dbproj-app
+    networks:
+      - dbproj-network
+    ports:
+      - "127.0.0.1:5000:5000"
+    build: ./app/
+    restart: never
+
+  mariadb:
+    image: mariadb:11.5.2
+    container_name: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./storage/db:/var/lib/mysql:z
+    ports:
+      - "127.0.0.1:3306:3306"
+    networks:
+      - dbproj-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    restart: never
+
+networks:
+  dbproj-network:
+    driver: bridge
