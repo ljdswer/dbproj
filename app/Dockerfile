@@ -9,4 +9,6 @@ COPY config.toml .
 COPY src .
 
 EXPOSE 5000
+
+WORKDIR /usr/src
 CMD [ "gunicorn", "-b", "0.0.0.0:5000", "app:create_app()" ]
