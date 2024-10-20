@@ -46,6 +46,55 @@ body {
   padding: 15px;
 }
 
+.auth-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2em 0em;
+}
+
+.auth-title-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  font-size: 2em;
+}
+
+.auth-title-back {
+  text-decoration: inherit;
+  color: var(--nord12);
+}
+
+.auth-title-title {
+  text-align: center;
+}
+
+.auth-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between;
+  min-width: 400px;
+  min-height: 300px;
+  border-radius: 15px;
+  background-color: var(--nord1);
+  padding: 1em;
+}
+
+.auth-form-field {
+  margin: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 7px;
+  font-size: 20px;
+  background-color: var(--nord4);
+}
+
+.auth-form-field::placeholder {
+  text-align: center;
+}
+
+.auth-form-submit {
+  background-color: var(--nord12);
+  color: var(--nord6);
+}
 
 /* form { */
 /* width: 80%; */

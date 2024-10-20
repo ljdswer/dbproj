@@ -1,4 +1,7 @@
 # Example config
+
+SECRET_KEY = 'random'
+
 [DATABASE]
 host = 'mariadb'
 port = 3306
