@@ -46,6 +46,10 @@ body {
   padding: 15px;
 }
 
+.request-chooser-logout {
+  background-color: var(--nord11);
+}
+
 .auth-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -94,6 +98,14 @@ body {
 .auth-form-submit {
   background-color: var(--nord12);
   color: var(--nord6);
+}
+
+.auth-footer {
+  background-color: var(--nord11);
+  text-align: center;
+  padding: 15px;
+  border-radius: 7px;
+  font-size: 15px;
 }
 
 /* form { */

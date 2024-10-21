@@ -12,7 +12,12 @@
       Главное меню
     </div>
     <div class="request-chooser-list">
+      {% if authorized %}
+      <a class="request-chooser-list-item center request-chooser-logout" href="{{ url_for('auth_bp.logout') }}">Выход -
+        {{ authorized }}</a>
+      {% else %}
       <a class="request-chooser-list-item center" href="{{ url_for('auth_bp.index') }}">Авторизация</a>
+      {% endif %}
       <a class="request-chooser-list-item center" href="/clients_placeholder">Клиенты</a>
       <a class="request-chooser-list-item center" href="/accounts_placeholder">Счета</a>
       <a class="request-chooser-list-item center" href="/ops_placeholder">Операции</a>
