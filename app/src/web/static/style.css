@@ -37,17 +37,8 @@ body {
   justify-content: space-around;
 }
 
-.request-chooser-list-item {
-  background-color: var(--nord3);
-  color: var(--nord6);
-  text-decoration: none;
-  border-radius: 5px;
-  margin: 0 10px;
-  padding: 15px;
-}
-
 .request-chooser-logout {
-  background-color: var(--nord11);
+  background-color: var(--nord11) !IMPORTANT;
 }
 
 .auth-container {
@@ -106,6 +97,26 @@ body {
   padding: 15px;
   border-radius: 7px;
   font-size: 15px;
+}
+
+.generic-message-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.generic-message-text {
+  font-size: 2em;
+  margin-bottom: 2em;
+}
+
+.generic-button {
+  text-decoration: inherit;
+  background-color: var(--nord3);
+  color: var(--nord6);
+  padding: 15px;
+  border-radius: 7px;
+  margin: 0 10px;
 }
 
 /* form { */

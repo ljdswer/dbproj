@@ -13,15 +13,15 @@
     </div>
     <div class="request-chooser-list">
       {% if authorized %}
-      <a class="request-chooser-list-item center request-chooser-logout" href="{{ url_for('auth_bp.logout') }}">Выход -
+      <a class="generic-button center request-chooser-logout" href="{{ url_for('auth_bp.logout') }}">Выход -
         {{ authorized }}</a>
       {% else %}
-      <a class="request-chooser-list-item center" href="{{ url_for('auth_bp.index') }}">Авторизация</a>
+      <a class="generic-button center" href="{{ url_for('auth_bp.index') }}">Авторизация</a>
       {% endif %}
-      <a class="request-chooser-list-item center" href="/clients_placeholder">Клиенты</a>
-      <a class="request-chooser-list-item center" href="/accounts_placeholder">Счета</a>
-      <a class="request-chooser-list-item center" href="/reps_placeholder">Отчёты</a>
-      <a class="request-chooser-list-item center" href="/reqs_placeholder">Запросы</a>
+      <a class="generic-button center" href="/clients_placeholder">Клиенты</a>
+      <a class="generic-button center" href="/accounts_placeholder">Счета</a>
+      <a class="generic-button center" href="/reps_placeholder">Отчёты</a>
+      <a class="generic-button center" href="{{ url_for('requests_bp.index') }}">Запросы</a>
     </div>
     <div class="request-chooser-footer"></div>
   </div>
