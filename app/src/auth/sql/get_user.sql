@@ -1,1 +1,1 @@
-SELECT user_pass_hash, user_group FROM auth WHERE user_name = %s;
+SELECT user_pass_hash, user_id FROM auth WHERE user_name = %s
