@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="generic-table-container">
+    <table class="generic-table-table">
+      <tr>
+        {% for column in columns %}
+        <th> {{ column }} </th>
+        {% endfor %}
+      </tr>
+      {% for row in rows %}
+      <tr>
+        {% for data in row %}
+        <td> {{ data }} </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+    <a class="generic-table-link generic-button" href="{{ link }}">Назад</a>
+  </div>
+</body>
+
+</html>
