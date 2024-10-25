@@ -7,15 +7,15 @@
 </head>
 
 <body class="center">
-  <div class="auth-container">
-    <div class="auth-title-container">
-      <a class="auth-title-back" href="{{ url_for('index') }}">&#x2190;</a>
-      <div class="auth-title-title">Вход</div>
+  <div class="generic-form-container">
+    <div class="generic-form-title-container">
+      <a class="generic-form-title-back" href="{{ url_for('index') }}">&#x2190;</a>
+      <div class="generic-form-title">Вход</div>
     </div>
-    <form method="POST" class="auth-form">
-      <input class="auth-form-login auth-form-field" type="text" name="user" placeholder="ЛОГИН" required />
-      <input class="auth-form-password auth-form-field" type="password" name="pass" placeholder="ПАРОЛЬ" required />
-      <button class="auth-form-submit auth-form-field">Войти</button>
+    <form method="POST" class="generic-form">
+      <input class="auth-form-login generic-form-field" type="text" name="user" placeholder="ЛОГИН" required />
+      <input class="auth-form-password generic-form-field" type="password" name="pass" placeholder="ПАРОЛЬ" required />
+      <button class="auth-form-submit generic-form-field">Войти</button>
     </form>
     {% if message %}
     <div class="auth-footer">{{ message }}</div>
