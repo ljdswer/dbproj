@@ -23,7 +23,7 @@ def create_app():
     @app.route("/")
     def index():
         if auth_key_name in session:
-            return render_template("index.html", authorized=session["user_name"])
+            return render_template("index.html", authorized=session["user_name"], internal=session["user_type"] == "internal")
         return render_template("index.html")
 
     app.register_blueprint(auth_blueprint, url_prefix="/auth")

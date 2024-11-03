@@ -56,10 +56,13 @@ def perform_login(login, passwd, priv) -> AuthResult:
     hash = sha256(passwd.encode()).hexdigest()
 
     sql = None
+    user_type = None
     if priv == "on":
         sql = sql_provider.get("get_user_internal.sql")
+        user_type = "internal"
     else:
         sql = sql_provider.get("get_user_external.sql")
+        user_type = "external"
     
     user = None
     try:
@@ -78,4 +81,5 @@ def perform_login(login, passwd, priv) -> AuthResult:
     session["user_id"] = user[0]["user_id"]
     session["user_name"] = login
     session["user_role"] = user[0]["user_role"]
+    session["user_type"] = user_type
     return AuthOk
