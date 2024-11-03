@@ -35,7 +35,7 @@ def create_app():
 def load_config(app: Flask, file: str):
     logger = logging.getLogger(__name__)
     logger.info("Loading config...")
-    app.config.from_file("config.toml", load=tomllib.load, text=False)
+    app.config.from_file(file, load=tomllib.load, text=False)
 
     if app.config["SECRET_KEY"] == "random":
         app.config["SECRET_KEY"] = os.urandom(12)
