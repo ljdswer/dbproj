@@ -20,7 +20,7 @@ def auth_decorator(groups: list, url_back):
                 return render_template(
                     "generic_message.html",
                     message="Вы не авторизованы",
-                    link=url_for("requests_bp.index"),
+                    link=url_back(),
                 )
             group = session['user_role']
             if group not in groups:
