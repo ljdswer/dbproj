@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="request-chooser-container">
+    <div class="request-chooser-title">
+      Меню клиента
+    </div>
+    <div class="request-chooser-list">
+      {% for req_name, req_ref in requests %}
+      <a class="generic-button center" href="{{req_ref}}">{{ req_name }}</a>
+      {% endfor %}
+    </div>
+    <div class="request-chooser-footer"></div>
+  </div>
+</body>
+
+</html>

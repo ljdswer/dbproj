@@ -5,6 +5,7 @@ import tomllib
 from flask import Flask, render_template, session
 from .auth import auth_blueprint, auth_key_name
 from .requests import requests_blueprint
+from .external import external_blueprint
 
 
 def create_app():
@@ -27,6 +28,7 @@ def create_app():
 
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
     app.register_blueprint(requests_blueprint, url_prefix="/requests")
+    app.register_blueprint(external_blueprint, url_prefix="/external")
     return app
 
 
