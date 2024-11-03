@@ -8,3 +8,8 @@ port = 3306
 user = 'root'
 pass = 'root'
 name = 'course'
+
+[PERMISSIONS]
+"app.requests.moneyperclient" = ["admin"]
+"app.requests.accountsfromtodate" = ["admin"]
+"app.external.remain" = ["regular"]

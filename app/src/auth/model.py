@@ -1,13 +1,40 @@
-from flask import session, current_app
+from flask import session, current_app, render_template
 from os import path
 from hashlib import sha256
 from ..db import SQLProvider, select, DataError
 
 from dataclasses import dataclass
 from typing import List, Union
+from functools import wraps
 
 module_path = path.dirname(path.abspath(__file__))
 sql_provider = SQLProvider(path.join(module_path, "sql"))
+
+def auth_decorator(url_back):
+    def inner_decorator(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if "user_id" not in session:
+                return render_template(
+                    "generic_message.html",
+                    message="Вы не авторизованы",
+                    link=url_back(),
+                )
+            group = session["user_role"]
+            groups = current_app.config["PERMISSIONS"][f"{f.__module__}.{f.__name__}"]
+            if group not in groups:
+                return render_template(
+                    "generic_message.html",
+                    message="Ваша учётная запись не обладает достаточным уровнем доступа",
+                    link=url_back(),
+                )
+
+            response = f(*args, **kwargs)
+            return response
+
+        return wrapped
+
+    return inner_decorator
 
 class AuthResult:
     pass

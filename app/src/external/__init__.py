@@ -27,9 +27,7 @@ def index():
     return render_template("menu.html", requests=requests)
 
 @external_blueprint.route("/remain", methods=["GET"])
-@auth_decorator(
-    ["regular"], lambda: url_for("external_bp.index")
-)
+@auth_decorator(lambda: url_for("external_bp.index"))
 def remain():
     result = get_remain()
 

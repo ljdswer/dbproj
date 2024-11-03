@@ -1,5 +1,4 @@
 from os import path
-from functools import wraps
 from flask import (
     Blueprint,
     session,
@@ -9,32 +8,6 @@ from flask import (
     url_for,
 )
 from .model import *
-
-def auth_decorator(groups: list, url_back):
-    def inner_decorator(f):
-        @wraps(f)
-        def wrapped(*args, **kwargs):
-            if auth_key_name not in session:
-                return render_template(
-                    "generic_message.html",
-                    message="Вы не авторизованы",
-                    link=url_back(),
-                )
-            group = session['user_role']
-            if group not in groups:
-                return render_template(
-                    "generic_message.html",
-                    message="Ваша учётная запись не обладает достаточным уровнем доступа",
-                    link=url_back(),
-                )
-
-            response = f(*args, **kwargs)
-            return response
-
-        return wrapped
-
-    return inner_decorator
-
 
 module_path = path.dirname(path.abspath(__file__))
 auth_blueprint = Blueprint(

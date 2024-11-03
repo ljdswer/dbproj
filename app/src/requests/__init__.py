@@ -26,7 +26,7 @@ def index():
 
 
 @requests_blueprint.route("/stat_moneyperclient", methods=["GET"])
-@auth_decorator(["admin", "statist"], lambda: url_for("requests_bp.index"))
+@auth_decorator(lambda: url_for("requests_bp.index"))
 def moneyperclient():
     result = get_moneyperclient()
     if not result:
@@ -44,7 +44,7 @@ def moneyperclient():
 
 
 @requests_blueprint.route("/stat_accountsfromtodate", methods=["GET", "POST"])
-@auth_decorator(["admin", "statist"], lambda: url_for("requests_bp.index"))
+@auth_decorator(lambda: url_for("requests_bp.index"))
 def accountsfromtodate():
     if request.method == "GET":
         return render_template("accounts_from_to_date.html")
