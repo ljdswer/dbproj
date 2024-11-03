@@ -4,6 +4,8 @@ import sys
 import tomllib
 from flask import Flask, render_template, session
 from .auth import auth_blueprint, auth_key_name
+from .requests import requests_blueprint
+
 
 def create_app():
     logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
@@ -20,10 +22,11 @@ def create_app():
     @app.route("/")
     def index():
         if auth_key_name in session:
-            return render_template("index.html", authorized=session[auth_key_name])
+            return render_template("index.html", authorized=session["user_name"])
         return render_template("index.html")
 
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
+    app.register_blueprint(requests_blueprint, url_prefix="/requests")
     return app
 
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="generic-form-container">
+    <div class="generic-form-title-container">
+      <a class="generic-form-title-back" href="{{ url_for('requests_bp.index') }}">&#x2190;</a>
+      <div class="generic-form-title">Счета с последним изменением остатка за период</div>
+    </div>
+    <form method="POST" class="generic-form">
+      <label for="date_from">С</label>
+      <input class="generic-form-field" id="date_from" type="date" name="date_from"
+        onchange="document.getElementById('date_to').min = this.value;" required />
+      <label for="date_to">По</label>
+      <input class="generic-form-field" id="date_to" type="date" name="date_to" required />
+      <button class="generic-form-field">Показать</button>
+    </form>
+  </div>
+</body>
+
+</html>
