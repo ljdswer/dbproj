@@ -68,7 +68,7 @@ def moneyperclient():
         "generic_table.html",
         link=url_for("requests_bp.index"),
         columns=["№ Договора", "Сумма на счетах", "Число счетов"],
-        rows=[(i[0], i[1], i[2]) for i in stats],
+        rows=[(i["agreement_no"], i["sum"], i["amount_of_accounts"]) for i in stats],
     )
 
 
@@ -105,5 +105,5 @@ def accountsfromtodate():
     return render_template(
         "generic_table.html",
         columns=["ИД", "Валюта", "Остаток", "Дата установления остатка"],
-        rows=[(i[0], i[1], i[2], i[3]) for i in result],
+        rows=[(i["account_id"], i["currency"], i["leftover"], i["leftover_assign_date"]) for i in result],
     )

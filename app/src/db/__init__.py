@@ -12,5 +12,6 @@ def select(dbconfig: dict, query: str, args: tuple) -> list:
     with DBContextManager(dbconfig) as cur:
         logger.debug(f"Executing {query} with: {args}")
         cur.execute(query, args)
-        result = [i for i in cur]
+        schema = [c[0] for c in cur.description]
+        result = [dict(zip(schema, row)) for row in cur.fetchall()]
     return result

@@ -12,20 +12,6 @@ from flask import (
 from hashlib import sha256
 from ..db import SQLProvider, select, DataError
 
-
-def group_by_user(user_id):
-    try:
-        return select(
-            current_app.config["DATABASE"],
-            sql_provider.get("group_by_user.sql"),
-            (user_id, ),
-        )[0][0]
-    except DataError:
-        return None
-    except IndexError:
-        return None
-
-
 def auth_decorator(groups: list, url_back):
     def inner_decorator(f):
         @wraps(f)
@@ -36,7 +22,7 @@ def auth_decorator(groups: list, url_back):
                     message="Вы не авторизованы",
                     link=url_for("requests_bp.index"),
                 )
-            group = group_by_user(session[auth_key_name])
+            group = session['user_role']
             if group not in groups:
                 return render_template(
                     "generic_message.html",
@@ -69,14 +55,22 @@ def index():
 def authenticate():
     login = request.form["user"]
     passwd = request.form["pass"]
+    priv = request.form.get("priv") or "off"
 
     if not all([login, passwd]):
         return 400
     hash = sha256(passwd.encode()).hexdigest()
+
+    sql = None
+    if priv == "on":
+        sql = sql_provider.get("get_user_internal.sql")
+    else:
+        sql = sql_provider.get("get_user_external.sql")
+    
     user = None
     try:
         user = select(
-            current_app.config["DATABASE"], sql_provider.get("get_user.sql"), (login,)
+            current_app.config["DATABASE"], sql, (login,)
         )
     except DataError:
         return render_template("auth.html", message="Некорректрый запрос")
@@ -84,16 +78,17 @@ def authenticate():
     if len(user) < 1:
         return render_template("auth.html", message="Пользователь не найден")
 
-    if hash != user[0][0]:
+    if hash != user[0]["user_pass_hash"]:
         return render_template("auth.html", message="Неверный пароль")
 
-    session[auth_key_name] = user[0][1]
+    session[auth_key_name] = user[0]["user_id"]
     session["user_name"] = login
+    session["user_role"] = user[0]["user_role"]
     return redirect(url_for("index"))
 
 
 @auth_blueprint.route("/logout")
 def logout():
     if auth_key_name in session:
-        session.pop(auth_key_name)
+        session.clear()
     return redirect(url_for("index"))

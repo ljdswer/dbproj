@@ -15,6 +15,10 @@
     <form method="POST" class="generic-form">
       <input class="auth-form-login generic-form-field" type="text" name="user" placeholder="ЛОГИН" required />
       <input class="auth-form-password generic-form-field" type="password" name="pass" placeholder="ПАРОЛЬ" required />
+      <div style="display: flex; justify-content: space-around;">
+        <label for="priv">Внутренний пользователь</label>
+        <input class="auth-form-priv generic-form-field" type="checkbox" name="priv" id="priv">
+      </div>
       <button class="auth-form-submit generic-form-field">Войти</button>
     </form>
     {% if message %}
