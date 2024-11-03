@@ -6,7 +6,7 @@ services:
     ports:
       - "127.0.0.1:5000:5000"
     build: ./app/
-    restart: never
+    restart: no
 
   mariadb:
     image: mariadb:11.5.2
@@ -25,7 +25,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
-    restart: never
+    restart: no
 
 networks:
   dbproj-network:
