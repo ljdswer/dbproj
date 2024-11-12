@@ -18,7 +18,7 @@ requests_blueprint = Blueprint(
 @requests_blueprint.route("/")
 def index():
     requests = [
-        ("Назад", url_for("index")),
+        ("Назад", url_for("mainmenu_bp.index")),
         ("Клиент - Сумма - Число счетов", url_for("requests_bp.moneyperclient")),
         ("Счета с последним изменением остатка за период", url_for("requests_bp.accountsfromtodate")),
     ]

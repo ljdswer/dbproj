@@ -3,6 +3,7 @@ import logging
 import sys
 import tomllib
 from flask import Flask, render_template, session
+from .mainmenu import mainmenu_blueprint
 from .auth import auth_blueprint, auth_key_name
 from .requests import requests_blueprint
 from .external import external_blueprint
@@ -19,13 +20,8 @@ def create_app():
     )
     load_config(app, "config.toml")
     logger.info("Starting app...")
-
-    @app.route("/")
-    def index():
-        if auth_key_name in session:
-            return render_template("index.html", authorized=session["user_name"], internal=session["user_type"] == "internal")
-        return render_template("index.html")
-
+    
+    app.register_blueprint(mainmenu_blueprint, url_prefix="/")
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
     app.register_blueprint(requests_blueprint, url_prefix="/requests")
     app.register_blueprint(external_blueprint, url_prefix="/external")

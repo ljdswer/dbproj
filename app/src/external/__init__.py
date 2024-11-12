@@ -21,7 +21,7 @@ external_blueprint = Blueprint(
 @external_blueprint.route("/")
 def index():
     requests = [
-        ("Назад", url_for("index")),
+        ("Назад", url_for("mainmenu_bp.index")),
         ("Остаток на собственых счетах", url_for("external_bp.remain")),
     ]
     return render_template("menu.html", requests=requests)

@@ -30,10 +30,10 @@ def authenticate():
     result = perform_login(login, passwd, priv)
     if isinstance(result, AuthErr):
         return render_template("auth.html", message=result.error)
-    return redirect(url_for("index"))
+    return redirect(url_for("mainmenu_bp.index"))
 
 
 @auth_blueprint.route("/logout")
 def logout():
     clear_login()
-    return redirect(url_for("index"))
+    return redirect(url_for("mainmenu_bp.index"))
