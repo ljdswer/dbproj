@@ -12,4 +12,9 @@ name = 'course'
 [PERMISSIONS]
 "requests_bp.moneyperclient" = ["admin"]
 "requests_bp.accountsfromtodate" = ["admin"]
+
+"clients_bp.index" = ["admin"]
+"clients_bp.edit" = ["admin"]
+"clients_bp.create" = ["admin"]
+
 "external_bp.remain" = ["regular"]

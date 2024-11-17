@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="generic-table-container">
+    <table class="generic-table-table">
+      <tr>
+        <th> № Договора </th>
+        <th> Фамилия </th>
+        <th> Дата рождения </th>
+        <th> Адрес </th>
+        <th> Номер телефона </th>
+        <th> Действия </th>
+      </tr>
+
+      {% for row in rows %}
+      <tr id="{{ row[0] }}">
+        <td> <input class="client-edit-input" name="agreement_no" placeholder="{{ row[0] }}" value="{{ row[0] }}"
+            readonly> </td>
+        <td> <input type="text" class="client-edit-input" name="last_name" placeholder="{{ row[1] }}"
+            value="{{ row[1] }}" autocomplete="off" readonly> </td>
+        <td> <input type="date" class="client-edit-input" name="date_of_birth" placeholder="{{ row[2] }}"
+            value="{{ row[2] }}" autocomplete="off" readonly> </td>
+        <td> <input type="text" class="client-edit-input" name="address" placeholder="{{ row[3] }}" value="{{ row[3] }}"
+            autocomplete="off" readonly> </td>
+        <td> <input type="text" class="client-edit-input" name="phone_no" placeholder="{{ row[4] }}"
+            value="{{ row[4] }}" autocomplete="off" readonly> </td>
+        <td>
+          <button class="client-button client-button-edit" onclick="editClient('{{ row[0] }}')">&#x270E;</button>
+          <div class="edit-mode" style="display: none;">
+            <button class="client-button client-button-approve"
+              onclick="approveEditClient('{{ row[0] }}')">&#x2705;</button>
+            <button class="client-button client-button-cancel"
+              onclick="cancelEditClient('{{ row[0] }}', true)">&#x274C;</button>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <form class="client-append-form" action="{{ url_for('clients_bp.create') }}" method="post">
+          <td> <input type="number" class="add-client-form-field" name="agreement_no" placeholder="№ Договора"> </td>
+          <td> <input type="text" class="add-client-form-field" name="last_name" placeholder="Фамилия"> </td>
+          <td> <input type="date" class="add-client-form-field" name="date_of_birth" placeholder="Дата рождения"> </td>
+          <td> <input type="text" class="add-client-form-field" name="address" placeholder="Адрес"> </td>
+          <td> <input type="text" class="add-client-form-field" name="phone_no" placeholder="Телефон"> </td>
+          <td> <button class="client-append-button add-client-form-field" type="submit">Добавить</button> </td>
+        </form>
+      </tr>
+
+    </table>
+    <a class="generic-table-link generic-button" href="{{ url_for('mainmenu_bp.index') }}">Назад</a>
+  </div>
+
+  <script>
+    function editClient(agreement_no) {
+      const row = document.getElementById(agreement_no);
+      const inputs = row.getElementsByClassName("client-edit-input");
+      for (let i = 1; i < inputs.length; i++) {
+        inputs[i].readOnly = false;
+      }
+      row.getElementsByClassName("edit-mode")[0].style.display = "block";
+      row.getElementsByClassName("client-button-edit")[0].style.display = "none";
+    }
+
+    function cancelEditClient(agreement_no, revert) {
+      const row = document.getElementById(agreement_no);
+      const inputs = row.getElementsByClassName("client-edit-input");
+      for (let i = 1; i < inputs.length; i++) {
+        if (revert)
+          inputs[i].value = inputs[i].placeholder;
+        inputs[i].readOnly = true;
+      }
+      row.getElementsByClassName("edit-mode")[0].style.display = "none";
+      row.getElementsByClassName("client-button-edit")[0].style.display = "inherit";
+    }
+
+    function approveEditClient(agreement_no) {
+      const row = document.getElementById(agreement_no);
+      const formData = new FormData();
+      formData.append("agreement_no", row.querySelector("[name='agreement_no']").value);
+      formData.append("last_name", row.querySelector("[name='last_name']").value);
+      formData.append("date_of_birth", row.querySelector("[name='date_of_birth']").value);
+      formData.append("address", row.querySelector("[name='address']").value);
+      formData.append("phone_no", row.querySelector("[name='phone_no']").value);
+
+      fetch("{{ url_for('clients_bp.edit') }}", { method: "POST", body: formData })
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            cancelEditClient(agreement_no, true);
+            alert(`Error: ${data.error}`);
+          }
+        })
+        .catch(() => {
+          cancelEditClient(agreement_no, true);
+          alert("An unexpected error occurred.");
+        }).then(() => {
+          cancelEditClient(agreement_no, false);
+        });
+    }
+
+  </script>
+
+</body>
+
+</html>

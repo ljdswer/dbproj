@@ -17,7 +17,7 @@
         {{ authorized }}</a>
 
         {% if internal %}
-          <a class="generic-button center" href="/clients_placeholder">Клиенты</a>
+          <a class="generic-button center" href="{{ url_for('clients_bp.index') }}">Клиенты</a>
           <a class="generic-button center" href="/accounts_placeholder">Счета</a>
           <a class="generic-button center" href="/reps_placeholder">Отчёты</a>
           <a class="generic-button center" href="{{ url_for('requests_bp.index') }}">Запросы</a>
