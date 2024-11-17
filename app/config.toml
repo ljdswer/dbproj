@@ -10,6 +10,6 @@ pass = 'root'
 name = 'course'
 
 [PERMISSIONS]
-"app.requests.moneyperclient" = ["admin"]
-"app.requests.accountsfromtodate" = ["admin"]
-"app.external.remain" = ["regular"]
+"requests_bp.moneyperclient" = ["admin"]
+"requests_bp.accountsfromtodate" = ["admin"]
+"external_bp.remain" = ["regular"]

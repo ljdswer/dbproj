@@ -1,4 +1,4 @@
-from flask import session, current_app, render_template
+from flask import session, current_app, render_template, request
 from os import path
 from hashlib import sha256
 from ..db import SQLProvider, select, DataError
@@ -21,7 +21,7 @@ def auth_decorator(url_back):
                     link=url_back(),
                 )
             group = session["user_role"]
-            groups = current_app.config["PERMISSIONS"][f"{f.__module__}.{f.__name__}"]
+            groups = current_app.config["PERMISSIONS"][request.endpoint]
             if group not in groups:
                 return render_template(
                     "generic_message.html",
