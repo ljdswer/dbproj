@@ -19,7 +19,7 @@
         {% if internal %}
           <a class="generic-button center" href="{{ url_for('clients_bp.index') }}">Клиенты</a>
           <a class="generic-button center" href="/accounts_placeholder">Счета</a>
-          <a class="generic-button center" href="/reps_placeholder">Отчёты</a>
+          <a class="generic-button center" href="{{ url_for('reports_bp.index') }}">Отчеты</a>
           <a class="generic-button center" href="{{ url_for('requests_bp.index') }}">Запросы</a>
         {% else %}
           <a class="generic-button center" href="{{ url_for('external_bp.index') }}">Меню клиента</a>

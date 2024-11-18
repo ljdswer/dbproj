@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="request-chooser-container">
+    <div class="request-chooser-title">{% if view %} Посмотреть отчет {% else %} Создать отчет {% endif %}</div>
+    <div class="request-chooser-list">
+      <a class="generic-button center" href="{{ url_for('reports_bp.index') }}">Назад</a>
+      {% for report_type, friendly_name in reports %}
+        <form method="POST" class="center">
+          <input type="hidden" name="report_type" value="{{ report_type }}">
+          <button type="submit" class="generic-button">{{ friendly_name }}</button>
+        </form>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>

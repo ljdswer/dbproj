@@ -8,6 +8,7 @@ from .auth import auth_blueprint, auth_key_name
 from .requests import requests_blueprint
 from .external import external_blueprint
 from .clients import clients_blueprint
+from .reports import reports_blueprint
 
 
 def create_app():
@@ -27,6 +28,9 @@ def create_app():
     app.register_blueprint(requests_blueprint, url_prefix="/requests")
     app.register_blueprint(external_blueprint, url_prefix="/external")
     app.register_blueprint(clients_blueprint, url_prefix="/clients")
+    app.register_blueprint(reports_blueprint, url_prefix="/reports")
+
+
     return app
 
 

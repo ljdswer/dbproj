@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+</head>
+
+<body class="center">
+  <div class="request-chooser-container">
+    <div class="request-chooser-title">
+      Отчеты
+    </div>
+    <div class="request-chooser-list">
+      <a class="generic-button center" href="{{ url_for('mainmenu_bp.index') }}">Главное меню</a>
+      <a class="generic-button center" href="{{ url_for('reports_bp.create') }}">Создать</a>
+      <a class="generic-button center" href="{{ url_for('reports_bp.view') }}">Посмотреть</a>
+    </div>
+    <div class="request-chooser-footer"></div>
+  </div>
+</body>
+
+</html>
