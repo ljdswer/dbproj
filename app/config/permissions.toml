@@ -1,14 +1,3 @@
-# Example config
-
-SECRET_KEY = 'random'
-
-[DATABASE]
-host = 'mariadb'
-port = 3306
-user = 'root'
-pass = 'root'
-name = 'course'
-
 [PERMISSIONS]
 "requests_bp.moneyperclient" = ["admin"]
 "requests_bp.accountsfromtodate" = ["admin"]
@@ -18,3 +7,7 @@ name = 'course'
 "clients_bp.create" = ["admin"]
 
 "external_bp.remain" = ["regular"]
+
+"reports_bp.index" = ["admin", "stat"]
+"reports_bp.create" = ["admin"]
+"reports_bp.view" = ["stat"]

@@ -1,0 +1,6 @@
+[DATABASE]
+host = 'mariadb'
+port = 3306
+user = 'root'
+pass = 'root'
+name = 'course'

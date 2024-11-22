@@ -20,7 +20,7 @@ def create_app():
         static_folder="web/static",
         template_folder="web/templates",
     )
-    load_config(app, "config.toml")
+    load_config(app, "config")
     logger.info("Starting app...")
     
     app.register_blueprint(mainmenu_blueprint, url_prefix="/")
@@ -34,10 +34,14 @@ def create_app():
     return app
 
 
-def load_config(app: Flask, file: str):
+def load_config(app: Flask, path: str):
     logger = logging.getLogger(__name__)
     logger.info("Loading config...")
-    app.config.from_file(file, load=tomllib.load, text=False)
+
+    for file in os.listdir(path):
+        logger.info(f"Loading config file {file}...")
+        with open(f"{path}/{file}", "rb") as f:
+            app.config.update(tomllib.load(f))
 
     if app.config["SECRET_KEY"] == "random":
         app.config["SECRET_KEY"] = os.urandom(12)

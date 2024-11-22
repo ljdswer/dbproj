@@ -1,0 +1,3 @@
+# Example config
+
+SECRET_KEY = 'random'
