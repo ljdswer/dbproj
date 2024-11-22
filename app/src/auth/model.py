@@ -67,7 +67,7 @@ def perform_login(login, passwd, priv) -> AuthResult:
     user = None
     try:
         user = select(
-            current_app.config["DATABASE"], sql, (login,)
+            current_app.config["DATABASE"]["auth"], sql, (login,)
         )
     except DataError:
         return AuthErr("Данные запроса некорректны")

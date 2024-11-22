@@ -38,7 +38,7 @@ def create_report(report_type: str, form_data) -> Result:
 
     sql = sql_provider.get(report_config_result.value["sql_create"])
     try:
-        result = select(current_app.config["DATABASE"], sql, field_values)
+        result = select(current_app.config["DATABASE"]["reports"], sql, field_values)
     except DataError:
         return Result(error="Запрос некорректен")
     
@@ -63,7 +63,7 @@ def view_report(report_type: str, form_data) -> Result:
 
     sql = sql_provider.get(report_config_result.value["sql_view"])
     try:
-        result = select(current_app.config["DATABASE"], sql, field_values)
+        result = select(current_app.config["DATABASE"]["reports"], sql, field_values)
     except DataError:
         return Result(error="Запрос некорректен")
     

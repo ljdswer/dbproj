@@ -1,6 +1,41 @@
-[DATABASE]
+[DATABASE.fullaccess]
 host = 'mariadb'
 port = 3306
 user = 'root'
 pass = 'root'
+name = 'course'
+
+[DATABASE.auth]
+host = 'mariadb'
+port = 3306
+user = 'auth'
+pass = 'auth'
+name = 'course'
+
+[DATABASE.clients]
+host = 'mariadb'
+port = 3306
+user = 'clients'
+pass = 'clients'
+name = 'course'
+
+[DATABASE.requests]
+host = 'mariadb'
+port = 3306
+user = 'reqs'
+pass = 'reqs'
+name = 'course'
+
+[DATABASE.reports]
+host = 'mariadb'
+port = 3306
+user = 'reports'
+pass = 'reports'
+name = 'course'
+
+[DATABASE.external]
+host = 'mariadb'
+port = 3306
+user = 'external'
+pass = 'external'
 name = 'course'

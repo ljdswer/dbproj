@@ -8,7 +8,7 @@ sql_provider = SQLProvider(path.join(module_path, "sql"))
 
 def get_moneyperclient() -> Optional[list]:
     sql = sql_provider.get("money_per_client.sql")
-    stats = select(current_app.config["DATABASE"], sql, ())
+    stats = select(current_app.config["DATABASE"]["requests"], sql, ())
     if len(stats) < 1:
         return None
     return [(i["agreement_no"], i["sum"], i["amount_of_accounts"]) for i in stats]
@@ -21,7 +21,7 @@ def get_accountsfromtodate(date_from, date_to) -> Optional[list]:
     result = None
     try:
         result = select(
-            current_app.config["DATABASE"],
+            current_app.config["DATABASE"]["requests"],
             sql,
             (
                 date_from,

@@ -12,7 +12,7 @@ def list_clients() -> Result[List]:
     result = None
     try:
         result = select(
-            current_app.config["DATABASE"],
+            current_app.config["DATABASE"]["clients"],
             sql,
             (),
         )
@@ -27,7 +27,7 @@ def edit_client(agreement_no: int, last_name: str, date_of_birth: str, address: 
     sql = sql_provider.get("edit_client.sql")
     try:
         alter(
-            current_app.config["DATABASE"],
+            current_app.config["DATABASE"]["clients"],
             sql,
             (last_name, date_of_birth, address, phone_no, agreement_no),
         )
@@ -43,7 +43,7 @@ def create_client(agreement_no: int, last_name: str, date_of_birth: str, address
     sql = sql_provider.get("create_client.sql")
     try:
         alter(
-            current_app.config["DATABASE"],
+            current_app.config["DATABASE"]["clients"],
             sql,
             (agreement_no, last_name, date_of_birth, address, phone_no),
         )
