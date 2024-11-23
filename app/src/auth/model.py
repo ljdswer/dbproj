@@ -82,4 +82,6 @@ def perform_login(login, passwd, priv) -> AuthResult:
     session["user_name"] = login
     session["user_role"] = user[0]["user_role"]
     session["user_type"] = user_type
+    if user_type == "external":
+        session["agreement_no"] = user[0]["agreement_no"]
     return AuthOk

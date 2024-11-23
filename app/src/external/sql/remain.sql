@@ -1,1 +1,1 @@
-SELECT account_id, currency, leftover FROM account WHERE agreement_no = (SELECT agreement_no FROM auth_external WHERE user_id = %s)
+SELECT account_id, currency, leftover FROM account WHERE agreement_no = %s
