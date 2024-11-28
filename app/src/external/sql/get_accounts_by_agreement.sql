@@ -1,0 +1,1 @@
+SELECT account_id FROM account WHERE agreement_no = %s;

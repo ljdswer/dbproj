@@ -7,6 +7,7 @@
 "clients_bp.create" = ["admin"]
 
 "external_bp.remain" = ["regular"]
+"external_bp.transfer" = ["regular"]
 
 "reports_bp.index" = ["admin", "stat"]
 "reports_bp.create" = ["admin"]

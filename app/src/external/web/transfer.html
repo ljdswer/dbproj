@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Перевод между собственными счетами</title>
+</head>
+
+<body class="center">
+    <div class="generic-form-container">
+        <div class="generic-form-title-container">
+            <a class="generic-form-title-back" href="{{ url_for('external_bp.index') }}">&#x2190;</a>
+            <div class="generic-form-title">Перевод между собственными счетами</div>
+        </div>
+        <form method="POST" class="generic-form">
+            <select class="generic-form-field" name="src_account_id">
+                {% for account in accounts %}
+                <option value="{{ account }}"> {{ account }} </option>
+                {% endfor %}
+            </select>
+            <select class="generic-form-field" name="dst_account_id">
+                {% for account in accounts %}
+                <option value="{{ account }}"> {{ account }} </option>
+                {% endfor %}
+            </select>
+            <input class="generic-form-field" type="number" min="0" step=".01" name="amount" placeholder="Сумма" required>
+            <button class="generic-form-field" type="submit">Перевести</button>
+        </form>
+    </div>
+</body>
+
+</html>
