@@ -1,10 +1,10 @@
-[DATABASE.fullaccess]
-host = 'mariadb'
-port = 3306
-user = 'root'
-pass = 'root'
-name = 'course'
-
+# [DATABASE.fullaccess]
+# host = 'mariadb'
+# port = 3306
+# user = 'root'
+# pass = 'root'
+# name = 'course'
+# 
 [DATABASE.auth]
 host = 'mariadb'
 port = 3306

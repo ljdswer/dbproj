@@ -11,4 +11,4 @@
 
 "reports_bp.index" = ["admin", "stat"]
 "reports_bp.create" = ["admin"]
-"reports_bp.view" = ["stat"]
+"reports_bp.view" = ["admin", "stat"]

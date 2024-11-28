@@ -1,1 +1,8 @@
-[REPORTS]
+[REPORTS.client_history_report]
+friendly_name = "Отчёт о переводах за месяц"
+sql_create = "create_client_history_report.sql"
+sql_view = "view_client_history_report.sql"
+fields = [
+    { field_type = "number", field_name = "month", friendly_name = "Месяц" },
+    { field_type = "number", field_name = "year", friendly_name = "Год" }
+]

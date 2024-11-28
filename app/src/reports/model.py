@@ -1,6 +1,6 @@
 from os import path
 from flask import current_app
-from ..db import SQLProvider, select, DataError
+from ..db import SQLProvider, select, callproc, DataError
 from dataclasses import dataclass
 from typing import Union, List, Dict
 
@@ -38,7 +38,7 @@ def create_report(report_type: str, form_data) -> Result:
 
     sql = sql_provider.get(report_config_result.value["sql_create"])
     try:
-        result = select(current_app.config["DATABASE"]["reports"], sql, field_values)
+        result = callproc(current_app.config["DATABASE"]["reports"], sql, field_values)
     except DataError:
         return Result(error="Запрос некорректен")
     
