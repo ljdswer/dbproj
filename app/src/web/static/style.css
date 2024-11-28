@@ -162,8 +162,10 @@ body {
   color: var(--nord6);
   padding: 15px;
   border-radius: 5px;
+  border-color: transparent;
   margin: 0 10px;
   text-align: center;
+  cursor: pointer;
 }
 
 .client-append-container {
