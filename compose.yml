@@ -19,12 +19,6 @@ services:
       - "127.0.0.1:3306:3306"
     networks:
       - dbproj-network
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
     restart: no
 
 networks:
