@@ -1,6 +1,6 @@
 [PERMISSIONS]
-"requests_bp.moneyperclient" = ["admin"]
-"requests_bp.accountsfromtodate" = ["admin"]
+"requests_bp.moneyperclient" = ["admin", "manager"]
+"requests_bp.accountsfromtodate" = ["admin", "manager"]
 
 "clients_bp.index" = ["admin"]
 "clients_bp.edit" = ["admin"]
