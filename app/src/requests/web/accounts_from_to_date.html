@@ -17,7 +17,8 @@
       <input class="generic-form-field" id="date_from" type="date" name="date_from"
         onchange="document.getElementById('date_to').min = this.value;" required />
       <label for="date_to">По</label>
-      <input class="generic-form-field" id="date_to" type="date" name="date_to" required />
+      <input class="generic-form-field"  id="date_to" type="date" name="date_to"
+        onfocus="this.max=new Date().toISOString().split('T')[0]" required />
       <button class="generic-form-field">Показать</button>
     </form>
   </div>
