@@ -1,0 +1,1 @@
+SELECT leftover FROM account WHERE account_id = %s

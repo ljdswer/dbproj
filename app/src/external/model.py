@@ -1,9 +1,10 @@
-from ..db import SQLProvider, DataError, select, callproc
+from ..db import SQLProvider, DataError, select, DBContextManager
 from ..utils import Result
 from flask import current_app, session
 from typing import Optional
 from os import path
 from logging import getLogger
+from decimal import Decimal
 
 module_path = path.dirname(path.abspath(__file__))
 sql_provider = SQLProvider(path.join(module_path, "sql"))
@@ -26,21 +27,37 @@ def transfer_between_own(form_data) -> Result:
     if not all([form_data.get("src_account_id"), form_data.get("dst_account_id"), form_data.get("amount")]):
         return Result(error="Не все поля заполнены")
 
-    sql = sql_provider.get("transfer_between_own.sql")
-    result = None
+    owns = sql_provider.get("check_if_client_owns_account.sql")
+    leftover = sql_provider.get("get_leftover.sql")
+    history = sql_provider.get("insert_history.sql")
     try:
-        result = callproc(current_app.config["DATABASE"]["external"], sql,
-            (session["agreement_no"], form_data["src_account_id"], form_data["dst_account_id"], form_data["amount"]))[0]["Status"]
+        with DBContextManager(current_app.config["DATABASE"]["external"]) as cur:
+            cur.execute("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE")
+            cur.connection.begin()
+            
+            # Check if client owns the source account
+            cur.execute(owns, (session["agreement_no"], form_data["src_account_id"]))
+            result = cur.fetchone()
+            if not result:
+                return Result(error="Счёт не найден")
+            
+            # Check if client owns the source account
+            cur.execute(owns, (session["agreement_no"], form_data["dst_account_id"]))
+            result = cur.fetchone()
+            if not result:
+                return Result(error="Счёт не найден")
+
+            # Check if client has enough money on the source account
+            cur.execute(leftover, (form_data["src_account_id"], ))
+            result = cur.fetchone()[0]
+            if (Decimal(result) < Decimal(form_data["amount"])):
+                return Result(error="Недостаточно средств")
+
+            # Insert a row to the acc_history which will trigger money transfer
+            cur.execute(history, (session["agreement_no"], form_data["src_account_id"], form_data["dst_account_id"], form_data["amount"]))
+
+            # Just for clarity, DBContextManager will commit the transaction regardless
+            cur.connection.commit()
     except DataError:
         return Result(error="Запрос некорректен")
-
-    if result == "ACCOUNTNOTFOUND":
-        return Result(error="Не найден счет")
-    elif result == "NOTENOUGH":
-        return Result(error="Недостаточно средств")
-    elif result == "SUCCESS":
-        return Result(value=None)
-    
-    logger = getLogger(__name__)
-    logger.error(f"Unknown error from procedure: {result}")
-    return Result(error="Неизвестная ошибка")
+    return Result(value="Транзакция успешно выполнена")
