@@ -1,3 +1,5 @@
 mariadb
 flask
 gunicorn
+valkey
+simplejson

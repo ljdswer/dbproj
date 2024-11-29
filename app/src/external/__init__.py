@@ -30,7 +30,7 @@ def index():
 @external_blueprint.route("/remain", methods=["GET"])
 @auth_decorator(lambda: url_for("external_bp.index"))
 def remain():
-    result = get_remain()
+    result = get_remain(session["agreement_no"])
 
     if not result:
         return render_template(
@@ -50,7 +50,7 @@ def remain():
 @auth_decorator(lambda: url_for("external_bp.index"))
 def transfer():
     if request.method == "GET":
-        accounts = get_own_accounts()
+        accounts = get_own_accounts(session["agreement_no"])
         if not accounts:
             return render_template(
                 "generic_message.html",
