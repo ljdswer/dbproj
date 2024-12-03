@@ -1,1 +1,4 @@
 SECRET_KEY = 'random'
+
+[EXTERNAL_AUTH]
+url = 'http://external-auth-service:5000/api/get_user_info'

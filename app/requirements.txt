@@ -3,3 +3,4 @@ flask
 gunicorn
 valkey
 simplejson
+requests

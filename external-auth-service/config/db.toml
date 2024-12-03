@@ -1,0 +1,6 @@
+[DATABASE.auth]
+host = 'mariadb'
+port = 3306
+user = 'auth'
+pass = 'auth'
+name = 'course'
