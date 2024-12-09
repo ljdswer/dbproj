@@ -53,20 +53,11 @@ def accountsfromtodate():
 
     result = get_accountsfromtodate(date_from, date_to)
 
-    if result is None:
-        return render_template(
-            "generic_message.html",
-            link=request.url_rule,
-            message="Запрос некорректен",
-        )
-    if len(result) < 1:
-        return render_template(
-            "generic_message.html",
-            link=request.url_rule,
-            message="Нет данных",
-        )
+    if result.is_err():
+        return render_template("generic_message.html", link=request.url_rule, message=result.error)
+        
     return render_template(
         "generic_table.html",
         columns=["ИД", "Валюта", "Остаток", "Дата установления остатка"],
-        rows=result,
+        rows=result.value,
     )

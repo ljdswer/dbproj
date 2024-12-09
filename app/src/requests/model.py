@@ -1,5 +1,6 @@
 from flask import current_app
 from ..db import SQLProvider, select, DataError
+from ..utils import Result
 from os import path
 from typing import Optional
 
@@ -13,7 +14,7 @@ def get_moneyperclient() -> Optional[list]:
         return None
     return [(i["agreement_no"], i["sum"], i["amount_of_accounts"]) for i in stats]
 
-def get_accountsfromtodate(date_from, date_to) -> Optional[list]:
+def get_accountsfromtodate(date_from, date_to) -> Result[list]:
     if not all([date_from, date_to]):
         return None
 
@@ -29,6 +30,8 @@ def get_accountsfromtodate(date_from, date_to) -> Optional[list]:
             ),
         )
     except DataError:
-        return None
+        return Result(error="Данные некорректны")
+    if len(result) < 1:
+        return Result(error="Нет данных")
 
-    return [(i["account_id"], i["currency"], i["leftover"], i["leftover_assign_date"]) for i in result]
+    return Result(value=[(i["account_id"], i["currency"], i["leftover"], i["leftover_assign_date"]) for i in result])
