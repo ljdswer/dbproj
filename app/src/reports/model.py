@@ -47,6 +47,8 @@ def create_report(report_type: str, form_data) -> Result:
         return Result(error="Этот отчёт уже был создан")
     elif status == "NODATA":
         return Result(error="Нет данных для включения в отчёт")
+    elif status == "INCORRECTDATE":
+        return Result(error="Дата некорректна")
 
     return Result(value=result)
 
