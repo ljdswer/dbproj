@@ -9,7 +9,6 @@ from decimal import Decimal
 module_path = path.dirname(path.abspath(__file__))
 sql_provider = SQLProvider(path.join(module_path, "sql"))
 
-@fetch_from_cache(current_app.config["CACHE"], 30)
 def get_remain(agreement) -> Optional[list]:
     sql = sql_provider.get("remain.sql")
     accounts = select(current_app.config["DATABASE"]["external"], sql, (agreement,))
