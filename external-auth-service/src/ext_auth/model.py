@@ -31,4 +31,6 @@ def get_user_info(request) -> Union[None, dict]:
         )
     except DataError:
         return None
-    return data
+    if len(data) < 1:
+        return None
+    return data[0]

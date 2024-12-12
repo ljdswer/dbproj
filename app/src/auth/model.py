@@ -80,7 +80,7 @@ def perform_login_external(login, passwd) -> AuthResult:
         {"login": login, "passwd": passwd},    
     )
     try:
-        json = request.json()[0]
+        json = request.json()
         if "error" in json:
             return AuthErr(json["error"])
         session["user_id"] = json["user_id"]
