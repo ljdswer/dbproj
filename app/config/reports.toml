@@ -6,3 +6,12 @@ fields = [
     { field_type = "number", field_name = "month", friendly_name = "Месяц" },
     { field_type = "number", field_name = "year", friendly_name = "Год" }
 ]
+
+[REPORTS.client_registered_report]
+friendly_name = "Отчёт о зарегистрированных клиентах за месяц"
+sql_create = "create_client_registered_report.sql"
+sql_view = "view_client_registered_report.sql"
+fields = [
+    { field_type = "number", field_name = "month", friendly_name = "Месяц" },
+    { field_type = "number", field_name = "year", friendly_name = "Год" }
+]
